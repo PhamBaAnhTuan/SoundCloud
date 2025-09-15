@@ -5,7 +5,7 @@ import CircleImage from '@/src/components/CircleImage';
 import ParallaxScrollView from '@/src/components/ParallaxScrollView';
 import { ThemedText } from '@/src/components/ThemedText';
 
-export default function TabTwoScreen() {
+const ProfileScreen = () => {
   return (
     <ParallaxScrollView
       headerBackgroundColor={{ light: '#D0D0D0', dark: '#353636' }}
@@ -29,7 +29,7 @@ export default function TabTwoScreen() {
     </ParallaxScrollView >
   );
 }
-
+export default ProfileScreen;
 const styles = StyleSheet.create({
   // headerImage: {
   //   color: '#808080',
@@ -38,9 +38,10 @@ const styles = StyleSheet.create({
   //   position: 'absolute',
   // },
   avatarContainer: {
-    // position: 'fixed',
-    // top: -70,
-    // zIndex: 1,
-    alignItems: 'center'
+    position: 'fixed',
+    top: -70,
+    zIndex: 1,
+    alignItems: 'center',
+    alignSelf: 'center'
   },
 });
