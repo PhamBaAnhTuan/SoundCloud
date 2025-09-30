@@ -1,46 +1,92 @@
+import { FontAwesome, Fontisto, Ionicons } from '@expo/vector-icons';
+import { LinearGradient } from 'expo-linear-gradient';
 import { ScrollView, StyleSheet, TouchableOpacity, View } from 'react-native';
-
-import { HelloWave } from '@/src/components/HelloWave';
-import { ThemedText } from '@/src/components/ThemedText';
-import TopicCard from '@/src/components/TopicCard';
-import { FontAwesome, FontAwesome5, Fontisto, Ionicons } from '@expo/vector-icons';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
+// components
+import { HelloWave } from '@/src/components/HelloWave';
+import { ThemedButton } from '@/src/components/ThemedButton';
+import { ThemedText } from '@/src/components/ThemedText';
+import TopicCard from '@/src/components/TopicCard';
+import TrendByGenreCard from '@/src/components/TrendByGenreCard';
+// hooks
+import { useTheme } from '@/src/hooks/useTheme';
+// albums
+import { albums } from '@/src/constants/data';
+// actions
+import { useAppDispatch } from '@/src/hooks/useDispatch';
+import { setThemeAction } from '@/src/stores/slices/themeSlice';
+
+
 const HomeScreen = () => {
+  const { theme, mode } = useTheme()
+  const dispatch = useAppDispatch()
+  const setTheme = () => {
+    dispatch(setThemeAction());
+    // dispatch(resetThemeState());
+  }
   return (
-    <SafeAreaView style={{ flex: 1 }}>
+    <SafeAreaView style={{ flex: 1, padding: 5, backgroundColor: theme.background }}>
       <ScrollView >
+
         <View style={styles.titleContainer}>
           <View style={{ flexDirection: 'row', gap: 7 }}>
-            <ThemedText type="subtitle">Welcome!</ThemedText>
+            <ThemedText type='subtitle' >Welcome!</ThemedText>
             <HelloWave />
           </View>
-          <View style={{ gap: 15, flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}>
-            <TouchableOpacity>
-              <Fontisto name="cloud-up" size={24} color="white" />
-            </TouchableOpacity>
-            <TouchableOpacity>
-              <Ionicons name="chatbubble-ellipses-outline" size={24} color="white" />
-            </TouchableOpacity>
+          <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}>
+            <ThemedButton onPress={() => setTheme()}>
+              <Fontisto name="cloud-up" size={24} color={theme.text} />
+            </ThemedButton>
+            <ThemedButton>
+              <Ionicons name="chatbubble-ellipses-outline" size={24} color={theme.text} />
+            </ThemedButton>
           </View>
         </View>
 
-        <TouchableOpacity style={styles.randomPlayContainer}>
-          <View style={{ gap: 15, flexDirection: 'row', alignItems: 'center' }}>
-            <FontAwesome5 name="heartbeat" size={40} color="red" />
-            <ThemedText type='subtitle'>Your likes</ThemedText>
-          </View>
-          <TouchableOpacity style={{ height: 40, width: 40, borderRadius: '50%', backgroundColor: 'gray', alignItems: 'center', justifyContent: 'center' }}>
-            <FontAwesome name="random" size={24} color="white" />
+
+        <LinearGradient
+          colors={[theme.error, theme.border]}
+          style={{
+            borderRadius: 10
+          }}
+        >
+          <TouchableOpacity style={styles.randomPlayContainer}>
+            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+              <ThemedText type='subtitle' >Your likes</ThemedText>
+            </View>
+            <ThemedButton style={{ backgroundColor: theme.border }} >
+              <FontAwesome name="random" size={21} color={theme.text} />
+            </ThemedButton>
           </TouchableOpacity>
-        </TouchableOpacity>
+        </LinearGradient>
 
         <View style={styles.topicContainer}>
-          <TopicCard />
-          <TopicCard />
-          <TopicCard />
-          <TopicCard />
+          {albums.map((item, index) => (
+            <TopicCard
+              icon={"https://images.genius.com/1efc5de2af228d2e49d91bd0dac4dc49.300x300x1.jpg"}
+              title={item.genre}
+              genre={'item.genre'}
+            />
+          ))}
         </View>
+
+        {albums.map((item, index) => (
+          <View key={index}>
+            <ThemedText type='subtitle' style={{ marginVertical: 10 }} >{item.genre}</ThemedText>
+            <ScrollView horizontal={true} style={styles.trendByGenreContainer}>
+              {item.albums.map((album, index) => (
+                <TrendByGenreCard
+                  key={index}
+                  img={album.img}
+                  genre={album.name}
+                  subcription={album.subscription}
+                />
+              ))}
+            </ScrollView>
+          </View>
+        ))}
+
       </ScrollView>
     </SafeAreaView>
   );
@@ -53,15 +99,11 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    paddingHorizontal: 10
+    // paddingHorizontal: 10
   },
   randomPlayContainer: {
     height: 65,
-    width: '97%',
-    alignSelf: 'center',
-    backgroundColor: 'darkorange',
-    borderRadius: 5,
-    marginTop: 10,
+    width: '100%',
     paddingHorizontal: 10,
     flexDirection: 'row',
     alignItems: 'center',
@@ -70,13 +112,21 @@ const styles = StyleSheet.create({
 
   topicContainer: {
     // borderWidth: 1,
-    // borderColor: 'white',
     minHeight: 150,
-    width: 'auto',
+    width: '100%',
     flexDirection: 'row',
     flexWrap: 'wrap',
-    justifyContent: 'space-around',
+    justifyContent: 'space-between',
     alignItems: 'center',
-    alignContent: 'space-around'
+    alignContent: 'space-evenly'
+  },
+
+  trendByGenreContainer: {
+    // borderWidth: 1,
+    borderColor: 'white',
+    height: 250,
+    width: '100%',
+    flexDirection: 'row',
+    // padding: 5
   }
 });

@@ -1,16 +1,10 @@
-/**
- * Below are the colors that are used in the app. The colors are defined in the light and dark mode.
- * There are many other ways to style your app. For example, [Nativewind](https://www.nativewind.dev/), [Tamagui](https://tamagui.dev/), [unistyles](https://reactnativeunistyles.vercel.app), etc.
- */
+import { createSlice } from "@reduxjs/toolkit";
 
-const tintColorLight = "#0a7ea4";
-const tintColorDark = "#fff";
-
-export const Colors = {
+const initialState = {
 	mode: "light",
 	light: {
 		primary: "#007bff",
-		secondary: "#e7300fff",
+		secondary: "#f83706",
 		background: "#ffffff",
 		text: "#212529",
 		icon: "#495057",
@@ -26,7 +20,7 @@ export const Colors = {
 	},
 	dark: {
 		primary: "#0d6efd",
-		secondary: "#9e2d08ff",
+		secondary: "#f83706",
 		background: "#212529",
 		text: "#f8f9fa",
 		icon: "#adb5bd",
@@ -41,3 +35,19 @@ export const Colors = {
 		card: "#343a40",
 	},
 };
+const themeSlice = createSlice({
+	name: "theme",
+	initialState,
+	reducers: {
+		resetThemeState: () => {
+			console.log("Current state: ", initialState);
+			return initialState;
+		},
+		setThemeAction: (state) => {
+			state.mode = state.mode === "light" ? "dark" : "light";
+		},
+	},
+});
+
+export const { resetThemeState, setThemeAction } = themeSlice.actions;
+export default themeSlice.reducer;
