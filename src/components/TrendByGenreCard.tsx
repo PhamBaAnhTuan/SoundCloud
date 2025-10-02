@@ -15,15 +15,15 @@ const TrendByGenreCard = ({ img, genre, subcription }: CardProps) => {
    return (
       <Link href={'#'} style={[styles.container, { padding: 7 }]}>
          <Link.Trigger>
-            <View style={[styles.container]} >
-               <Image source={{ uri: `${img}` }} style={styles.cardImg} resizeMode='cover ' />
+            <View >
+               <Image source={{ uri: `${img}` }} style={styles.cardImg} resizeMode='cover' />
                <View style={{ paddingLeft: 5 }}>
                   <ThemedText type='defaultSemiBold'>{genre}</ThemedText>
                   <ThemedText style={{ color: 'gray' }}>{subcription}</ThemedText>
                </View>
             </View>
          </Link.Trigger>
-         <Link.Menu>
+         <Link.Menu >
             <Link.MenuAction title="Share" icon="square.and.arrow.up" onPress={null} />
             <Link.MenuAction title="Like" icon="heart" onPress={null} />
             <Link.MenuAction title="Add to playlist" icon="plus" onPress={null} />
@@ -41,14 +41,14 @@ export default TrendByGenreCard
 const styles = StyleSheet.create({
    container: {
       // borderWidth: 1,
-      height: 'auto',
+      height: 230,
       width: 'auto',
       alignItems: 'center',
       justifyContent: 'center'
    },
    cardImg: {
-      height: 150,
-      width: 150,
-      marginBottom: 10
+      height: 160,
+      width: 160,
+      marginBottom: 20
    }
 })

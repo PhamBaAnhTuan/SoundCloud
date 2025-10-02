@@ -1,6 +1,6 @@
 import { FontAwesome, Fontisto, Ionicons } from '@expo/vector-icons';
 import { LinearGradient } from 'expo-linear-gradient';
-import { ScrollView, StyleSheet, TouchableOpacity, View } from 'react-native';
+import { Dimensions, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 // components
@@ -25,9 +25,11 @@ const HomeScreen = () => {
     dispatch(setThemeAction());
     // dispatch(resetThemeState());
   }
+  const height = Dimensions.get('window').height
+  const log = () => console.log('height: ', height)
   return (
-    <SafeAreaView style={{ flex: 1, padding: 5, backgroundColor: theme.background }}>
-      <ScrollView >
+    <SafeAreaView style={{ flex: 1, paddingHorizontal: 5, backgroundColor: theme.background }}>
+      <ScrollView style={{ height: height }}>
 
         <View style={styles.titleContainer}>
           <View style={{ flexDirection: 'row', gap: 7 }}>
@@ -38,7 +40,7 @@ const HomeScreen = () => {
             <ThemedButton onPress={() => setTheme()}>
               <Fontisto name="cloud-up" size={24} color={theme.text} />
             </ThemedButton>
-            <ThemedButton>
+            <ThemedButton onPress={log}>
               <Ionicons name="chatbubble-ellipses-outline" size={24} color={theme.text} />
             </ThemedButton>
           </View>
@@ -50,10 +52,12 @@ const HomeScreen = () => {
           style={{
             borderRadius: 10
           }}
+          start={{ x: 0, y: 0.5 }}
+          end={{ x: 1, y: 1 }}
         >
           <TouchableOpacity style={styles.randomPlayContainer}>
             <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-              <ThemedText type='subtitle' >Your likes</ThemedText>
+              <Text style={{ color: 'white', fontSize: 17, fontWeight: 'bold' }} >Your likes</Text>
             </View>
             <ThemedButton style={{ backgroundColor: theme.border }} >
               <FontAwesome name="random" size={21} color={theme.text} />
@@ -64,6 +68,7 @@ const HomeScreen = () => {
         <View style={styles.topicContainer}>
           {albums.map((item, index) => (
             <TopicCard
+              key={index}
               icon={"https://images.genius.com/1efc5de2af228d2e49d91bd0dac4dc49.300x300x1.jpg"}
               title={item.genre}
               genre={'item.genre'}

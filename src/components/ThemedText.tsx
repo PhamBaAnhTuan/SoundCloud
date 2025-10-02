@@ -3,7 +3,7 @@ import { StyleSheet, Text, type TextProps } from 'react-native';
 import { useTheme } from '../hooks/useTheme';
 
 export type ThemedTextProps = TextProps & {
-  type?: 'default' | 'title' | 'defaultSemiBold' | 'subtitle' | 'link' | 'small';
+  type?: 'small' | 'smallBold' | 'default' | 'defaultBold' | 'large' | 'largeBold' | 'title' | 'subtitle' | 'link'
 };
 
 export function ThemedText({
@@ -11,21 +11,21 @@ export function ThemedText({
   type = 'default',
   ...rest
 }: ThemedTextProps) {
-  const { mode, theme, light, } = useTheme();
-  // const colorSet = mode === "light" ? light : dark;
-
+  const { theme } = useTheme();
 
   return (
     <Text
       style={[
         { color: theme.text },
-        // ...colorSet,
+        type === 'small' ? styles.small : undefined,
+        type === 'smallBold' ? styles.smallBold : undefined,
         type === 'default' ? styles.default : undefined,
-        type === 'defaultSemiBold' ? styles.defaultSemiBold : undefined,
+        type === 'defaultBold' ? styles.defaultBold : undefined,
+        type === 'large' ? styles.large : undefined,
+        type === 'largeBold' ? styles.largeBold : undefined,
         type === 'title' ? styles.title : undefined,
         type === 'subtitle' ? styles.subtitle : undefined,
         type === 'link' ? styles.link : undefined,
-        type === 'small' ? styles.small : undefined,
         style,
       ]}
       {...rest}
@@ -34,12 +34,26 @@ export function ThemedText({
 }
 
 const styles = StyleSheet.create({
+  small: {
+    fontSize: 13,
+  },
+  smallBold: {
+    fontSize: 13,
+    fontWeight: 'bold'
+  },
   default: {
     fontSize: 14,
   },
-  defaultSemiBold: {
-    fontSize: 16,
-    fontWeight: '600',
+  defaultBold: {
+    fontSize: 14,
+    fontWeight: 'bold',
+  },
+  large: {
+    fontSize: 17,
+  },
+  largeBold: {
+    fontSize: 17,
+    fontWeight: 'bold'
   },
   title: {
     fontSize: 32,
@@ -52,8 +66,5 @@ const styles = StyleSheet.create({
   link: {
     fontSize: 16,
     color: '#0a7ea4',
-  },
-  small: {
-    fontSize: 13,
-  },
+  }
 });
