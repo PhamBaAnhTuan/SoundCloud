@@ -5,12 +5,13 @@ import { ThemedText } from '../ThemedText'
 interface MusicListProps {
     musicImg: any,
     title: string,
-    artist: string
+    artist: string,
+    onPress: () => void
 }
 
-const MusicList = ({ musicImg, title, artist }: MusicListProps) => {
+const MusicList = ({ musicImg, title, artist, onPress }: MusicListProps) => {
     return (
-        <TouchableOpacity style={styles.container}>
+        <TouchableOpacity style={styles.container} onPress={onPress}>
             <Image source={{ uri: musicImg }} style={styles.musicImg} />
             <View style={styles.contentContainer}>
                 <ThemedText type='largeBold'>{title}</ThemedText>

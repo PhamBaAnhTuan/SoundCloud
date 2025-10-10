@@ -28,7 +28,8 @@ const SearchRecommend = () => {
 
 const styles = StyleSheet.create({
     container: {
-        // borderWidth: 1
+        // borderWidth: 1,
+        flex: 1
     },
     card: {
         borderRadius: 10,

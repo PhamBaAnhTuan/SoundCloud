@@ -1,8 +1,8 @@
 import { Link } from 'expo-router'
 import React from 'react'
 import { Image, StyleSheet, View } from 'react-native'
-import { useTheme } from '../hooks/useTheme'
-import { ThemedText } from './ThemedText'
+import { useTheme } from '../../hooks/useTheme'
+import { ThemedText } from '../ThemedText'
 
 
 interface TopicCardProps {
@@ -25,8 +25,8 @@ const TopicCard = ({ icon, title, genre }: TopicCardProps) => {
          <Link.Trigger>
             <View style={styles.cardContainer}>
                <Image style={styles.imgContainer} source={{ uri: icon }} resizeMode='contain' />
-               <View style={styles.titleContainer}>
-                  <ThemedText type='defaultSemiBold' style={{ fontWeight: 'bold' }}>{title}</ThemedText>
+               <View >
+                  <ThemedText type='defaultBold' style={{ fontWeight: 'bold' }} numberOfLines={1}>{title}</ThemedText>
                   <ThemedText type='small' >{genre}</ThemedText>
                </View>
 
@@ -54,18 +54,17 @@ const styles = StyleSheet.create({
       height: 60,
       width: '48%',
       borderRadius: 10,
-      marginVertical: 5
+      marginVertical: 3,
+      paddingHorizontal: 5
    },
    cardContainer: {
       height: '100%',
       width: '100%',
       flexDirection: 'row',
-      // justifyContent: 'space-between',
       alignItems: 'center'
    },
    imgContainer: {
       // borderWidth: 1,
-      // borderColor: 'white',
       borderRadius: 10,
       height: 50,
       width: 50,

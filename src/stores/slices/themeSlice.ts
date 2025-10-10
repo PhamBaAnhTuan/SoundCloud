@@ -17,6 +17,9 @@ const initialState = {
 		warning: "#fd7e14",
 		info: "#17a2b8",
 		card: "#eeeeee",
+		white: "#ffffff",
+		black: "#000",
+		darkblue: "#191970",
 	},
 	dark: {
 		primary: "#0d6efd",
@@ -33,6 +36,9 @@ const initialState = {
 		warning: "#fbbf24",
 		info: "#38bdf8",
 		card: "#343a40",
+		white: "#ffffff",
+		black: "#000",
+		darkblue: "#191970",
 	},
 };
 const themeSlice = createSlice({

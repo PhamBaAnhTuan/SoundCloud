@@ -22,8 +22,9 @@ export const ThemedButton = ({ children, style, ...rest }: ThemedButtonProps) =>
 
 const styles = StyleSheet.create({
     button: {
+        // borderWidth: 1,
         padding: 10,
-        borderRadius: '50%',
+        borderRadius: 50,
         alignItems: "center",
         justifyContent: "center",
     },

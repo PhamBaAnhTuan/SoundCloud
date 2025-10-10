@@ -1,15 +1,21 @@
 import { useTheme } from '@/src/hooks/useTheme'
 import { MaterialIcons } from '@expo/vector-icons'
 import React from 'react'
-import { StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, TouchableOpacity } from 'react-native'
+import { ThemedText } from '../ThemedText'
 
-const ChoiseList = () => {
+interface ChoiseListProps {
+    title: string,
+    onPress: () => void
+}
+
+const ChoiseList = ({ title, onPress }: ChoiseListProps) => {
     const { theme } = useTheme()
     return (
-        <View style={styles.listContainer}>
-            <Text>Your likes</Text>
+        <TouchableOpacity style={styles.listContainer} onPress={onPress}>
+            <ThemedText type='defaultBold' >{title}</ThemedText>
             <MaterialIcons name="keyboard-arrow-right" size={24} color={theme.text} />
-        </View>
+        </TouchableOpacity>
     )
 }
 
@@ -17,7 +23,6 @@ export default ChoiseList
 
 const styles = StyleSheet.create({
     listContainer: {
-        // flex: 1,
         // borderWidth: 1,
         height: 55,
         width: '100%',
