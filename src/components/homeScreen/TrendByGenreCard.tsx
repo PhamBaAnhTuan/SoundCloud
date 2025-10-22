@@ -1,8 +1,8 @@
 import { Link } from 'expo-router'
 import React from 'react'
 import { Image, StyleSheet, View } from 'react-native'
-import { useTheme } from '../hooks/useTheme'
-import { ThemedText } from './ThemedText'
+import { useTheme } from '../../hooks/useTheme'
+import { ThemedText } from '../ThemedText'
 
 interface CardProps {
    img: any,
@@ -13,13 +13,13 @@ interface CardProps {
 const TrendByGenreCard = ({ img, genre, subcription }: CardProps) => {
    const { theme } = useTheme()
    return (
-      <Link href={'#'} style={[styles.container, { padding: 7 }]}>
+      <Link href={'#'} style={[styles.container, { padding: 5 }]}>
          <Link.Trigger>
             <View >
                <Image source={{ uri: `${img}` }} style={styles.cardImg} resizeMode='cover' />
                <View style={{ paddingLeft: 5 }}>
-                  <ThemedText type='defaultSemiBold'>{genre}</ThemedText>
-                  <ThemedText style={{ color: 'gray' }}>{subcription}</ThemedText>
+                  <ThemedText type='defaultBold' >{genre}</ThemedText>
+                  <ThemedText style={{ color: 'gray' }} >{subcription}</ThemedText>
                </View>
             </View>
          </Link.Trigger>

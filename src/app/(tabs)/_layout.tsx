@@ -1,15 +1,17 @@
 import { Tabs } from 'expo-router';
 import React from 'react';
+import { StyleSheet, TouchableOpacity, View } from 'react-native';
 
 import { HapticTab } from '@/src/components/HapticTab';
 import { IconSymbol } from '@/src/components/ui/IconSymbol';
-import { useColorScheme } from '@/src/hooks/useColorScheme';
+import { useSearch } from '@/src/context/SearchContext';
 import { useTheme } from '@/src/hooks/useTheme';
-import { Text, View } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
+
 
 export default function TabLayout() {
-  const colorScheme = useColorScheme();
   const { theme } = useTheme()
+  const { setPattern } = useSearch()
   return (
     <Tabs
       screenOptions={{
@@ -17,8 +19,9 @@ export default function TabLayout() {
         headerShown: false,
         tabBarButton: HapticTab,
         tabBarStyle: {
-          backgroundColor: theme.background
-        }
+          backgroundColor: theme.background,
+          height: 80
+        },
       }}>
       <Tabs.Screen
         name="index"
@@ -37,6 +40,14 @@ export default function TabLayout() {
       <Tabs.Screen
         name="search"
         options={{
+          headerShown: true,
+          headerStyle: { backgroundColor: theme.background },
+          headerSearchBarOptions: {
+            placeholder: 'Search',
+            autoFocus: true,
+            onChangeText: (e) => setPattern(e.nativeEvent.text)
+          },
+          headerTintColor: theme.text,
           title: 'Search',
           tabBarIcon: ({ color }) => <IconSymbol size={28} name="magnifyingglass" color={color} />,
         }}
@@ -46,8 +57,14 @@ export default function TabLayout() {
         options={{
           title: 'Library',
           headerShown: true,
+          headerStyle: { backgroundColor: theme.background },
+          headerTintColor: theme.text,
           headerRight: () => (
-            <View><Text style={{ color: '#fff' }}>hi</Text></View>
+            <View style={styles.headerRightContainer}>
+              <TouchableOpacity style={styles.settingIcon}>
+                <Ionicons name="settings-outline" size={25} color={theme.text} />
+              </TouchableOpacity>
+            </View>
           ),
           tabBarIcon: ({ color }) => <IconSymbol size={28} name="character.book.closed.fill.he" color={color} />,
         }}
@@ -56,9 +73,27 @@ export default function TabLayout() {
         name="profile"
         options={{
           title: 'Profile',
-          tabBarIcon: ({ color }) => <IconSymbol size={28} name="paperplane.fill" color={color} />,
+          tabBarIcon: ({ color }) => <IconSymbol size={28} name="person" color={color} />,
         }}
       />
     </Tabs>
   );
 }
+
+const styles = StyleSheet.create({
+  headerRightContainer: {
+    // borderWidth: 1,
+    paddingRight: 10,
+    flexDirection: 'row',
+    gap: 3,
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
+  settingIcon: {
+    // borderWidth: 1,
+    height: 40,
+    width: 40,
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
+})

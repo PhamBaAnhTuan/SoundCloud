@@ -17,17 +17,15 @@ const SearchInput = ({ pattern, setPattern, searching, setSearching }: SearchPro
     // const [pattern, setPattern] = useState("");
     const inputRef = useRef<TextInput>(null);
 
-    // clear pattern nhưng vẫn giữ focus
     const clearPattern = () => {
-        setPattern("");
-        inputRef.current?.focus(); // giữ bàn phím mở
+        setPattern('');
+        inputRef.current?.focus();
     };
 
-    // cancel → reset input và blur
     const cancelSearch = () => {
-        setPattern("");
+        setPattern('');
         setSearching(false);
-        inputRef.current?.blur(); // ẩn bàn phím
+        inputRef.current?.blur();
     };
 
     return (

@@ -7,6 +7,7 @@ import 'react-native-reanimated';
 // redux
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
+import { SearchProvider } from '../context/SearchContext';
 import { persistor, store } from '../stores/config/store';
 
 export const unstable_settings = {
@@ -28,11 +29,13 @@ export default function RootLayout() {
     <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
       <Provider store={store}>
         <PersistGate persistor={persistor}>
-          <Stack>
-            <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-            <Stack.Screen name="+not-found" />
-          </Stack>
-          <StatusBar style="auto" />
+          <SearchProvider>
+            <Stack>
+              <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+              <Stack.Screen name="+not-found" />
+            </Stack>
+            <StatusBar style="auto" />
+          </SearchProvider>
         </PersistGate>
       </Provider>
     </ThemeProvider>
