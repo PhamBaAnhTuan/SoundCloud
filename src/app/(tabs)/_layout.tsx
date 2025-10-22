@@ -4,14 +4,14 @@ import { StyleSheet, TouchableOpacity, View } from 'react-native';
 
 import { HapticTab } from '@/src/components/HapticTab';
 import { IconSymbol } from '@/src/components/ui/IconSymbol';
-import { useSearch } from '@/src/context/SearchContext';
+import { useCommonContext } from '@/src/context/CommonContext';
 import { useTheme } from '@/src/hooks/useTheme';
 import { Ionicons } from '@expo/vector-icons';
 
 
 export default function TabLayout() {
   const { theme } = useTheme()
-  const { setPattern } = useSearch()
+  const { setPattern } = useCommonContext()
   return (
     <Tabs
       screenOptions={{
@@ -20,11 +20,13 @@ export default function TabLayout() {
         tabBarButton: HapticTab,
         tabBarStyle: {
           backgroundColor: theme.background,
-          height: 80
+          height: 80,
         },
-      }}>
+      }}
+      initialRouteName='home'
+    >
       <Tabs.Screen
-        name="index"
+        name="home"
         options={{
           title: 'Home',
           tabBarIcon: ({ color }) => <IconSymbol size={28} name="house.fill" color={color} />,

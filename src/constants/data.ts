@@ -1,8 +1,10 @@
+export const userAvatars = "https://i.pravatar.cc/300";
 export const albums = [
 	{
 		genre: "R&B/Soul",
 		height: 200,
 		coverImg: "https://media.pitchfork.com/photos/638902d5f777c8e284615da3/1:1/w_1500,h_1500,c_limit/SZA.jpg",
+		subscription: "Alternative R&B",
 		albums: [
 			{
 				img: "https://media.pitchfork.com/photos/638902d5f777c8e284615da3/1:1/w_1500,h_1500,c_limit/SZA.jpg",
@@ -40,6 +42,7 @@ export const albums = [
 		genre: "Hip hop",
 		height: 250,
 		coverImg: "https://i.scdn.co/image/ab67616d0000b273d9985092cd88bffd97653b58",
+		subscription: "Neiborhood gang",
 		albums: [
 			{
 				img: "https://i.scdn.co/image/ab67616d0000b273d9985092cd88bffd97653b58",
@@ -79,6 +82,7 @@ export const albums = [
 		height: 170,
 		coverImg:
 			"https://upload.wikimedia.org/wikipedia/en/thumb/9/96/Adele_-_25_%28Official_Album_Cover%29.png/250px-Adele_-_25_%28Official_Album_Cover%29.png",
+		subscription: "Poping heal",
 		albums: [
 			{
 				img: "https://upload.wikimedia.org/wikipedia/en/thumb/9/96/Adele_-_25_%28Official_Album_Cover%29.png/250px-Adele_-_25_%28Official_Album_Cover%29.png",
@@ -104,6 +108,7 @@ export const albums = [
 		genre: "EDM",
 		height: 230,
 		coverImg: "https://upload.wikimedia.org/wikipedia/en/thumb/1/14/Inrainbowscover.png/250px-Inrainbowscover.png",
+		subscription: "Get highest",
 		albums: [
 			{
 				img: "https://upload.wikimedia.org/wikipedia/en/thumb/1/14/Inrainbowscover.png/250px-Inrainbowscover.png",
@@ -137,6 +142,7 @@ export const albums = [
 		height: 330,
 		coverImg:
 			"https://upload.wikimedia.org/wikipedia/en/thumb/5/53/Beyonce_-_Lemonade_%28Official_Album_Cover%29.png/250px-Beyonce_-_Lemonade_%28Official_Album_Cover%29.png",
+		subscription: "Winds around hall",
 		albums: [
 			{
 				img: "https://upload.wikimedia.org/wikipedia/en/thumb/5/53/Beyonce_-_Lemonade_%28Official_Album_Cover%29.png/250px-Beyonce_-_Lemonade_%28Official_Album_Cover%29.png",
@@ -169,6 +175,7 @@ export const albums = [
 		height: 270,
 		coverImg:
 			"https://upload.wikimedia.org/wikipedia/en/thumb/2/27/Daft_Punk_-_Discovery.png/250px-Daft_Punk_-_Discovery.png",
+		subscription: "We will rock you",
 		albums: [
 			{
 				img: "https://upload.wikimedia.org/wikipedia/en/thumb/2/27/Daft_Punk_-_Discovery.png/250px-Daft_Punk_-_Discovery.png",
@@ -206,6 +213,7 @@ export const albums = [
 		genre: "Indie",
 		height: 250,
 		coverImg: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTUi3naBu_Xwqva4a8es_S-1PnBu--EnR4MvQ&s",
+		subscription: "Indie all time",
 		albums: [
 			{
 				img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTUi3naBu_Xwqva4a8es_S-1PnBu--EnR4MvQ&s",

@@ -35,10 +35,10 @@ export function ThemedText({
 
 const styles = StyleSheet.create({
   small: {
-    fontSize: 13,
+    fontSize: 12,
   },
   smallBold: {
-    fontSize: 13,
+    fontSize: 12,
     fontWeight: 'bold'
   },
   default: {

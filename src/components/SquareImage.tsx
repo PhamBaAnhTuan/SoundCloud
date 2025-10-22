@@ -3,16 +3,15 @@ import { Image, StyleSheet } from 'react-native'
 
 interface ImageProps {
    image: any,
-   size?: 'tiny' | 'small' | 'medium' | 'large'
+   size?: 'small' | 'medium' | 'large'
 }
 
-const CircleImage = ({ image, size }: ImageProps) => {
+const SquareImage = ({ image, size }: ImageProps) => {
    return (
       <Image source={image}
          style={[{
-            borderRadius: '50%',
+            borderRadius: 10,
          },
-         size === 'tiny' ? styles.tiny : undefined,
          size === 'small' ? styles.small : undefined,
          size === 'medium' ? styles.medium : undefined,
          size === 'large' ? styles.large : undefined,
@@ -21,13 +20,9 @@ const CircleImage = ({ image, size }: ImageProps) => {
    )
 }
 
-export default CircleImage
+export default SquareImage
 
 const styles = StyleSheet.create({
-   tiny: {
-      height: 40,
-      width: 40
-   },
    small: {
       height: 50,
       width: 50
