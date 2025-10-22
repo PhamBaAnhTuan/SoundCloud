@@ -1,14 +1,20 @@
+import { useTheme } from '@/src/hooks/useTheme'
 import React from 'react'
-import { StyleSheet, Text, View } from 'react-native'
+import { ScrollView, StyleSheet, View } from 'react-native'
 
 const LibraryScreen = () => {
+    const { theme } = useTheme()
     return (
-        <View>
-            <Text>library</Text>
+        <View style={{ flex: 1, backgroundColor: theme.background }}>
+            <ScrollView>
+
+            </ScrollView>
         </View>
     )
 }
 
 export default LibraryScreen
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({
+
+})
