@@ -11,7 +11,10 @@ import { AntDesign, FontAwesome, MaterialCommunityIcons, Octicons } from '@expo/
 interface FeedScreenProps {
     backgroundImg: string,
     like: number,
+    isLiked: boolean,
+    setIsLiked: any,
     comment: number,
+    openComment: any,
     trackName: string,
     artistAvatar: string,
     artistName: string,
@@ -19,9 +22,14 @@ interface FeedScreenProps {
     timeLine?: number
 }
 
-const FlatCard = ({ backgroundImg, like, comment, trackName, artistAvatar, artistName, isFollow }: FeedScreenProps) => {
+const FlatCard = ({
+    backgroundImg, like, comment, openComment,
+    trackName, artistAvatar, artistName, isFollow,
+    isLiked, setIsLiked
+}: FeedScreenProps) => {
     const { theme } = useTheme()
     const { contentHeight } = useLayout()
+
     return (
         <ImageBackground
             style={[styles.backgroundContainer, { height: contentHeight }]}
@@ -30,11 +38,13 @@ const FlatCard = ({ backgroundImg, like, comment, trackName, artistAvatar, artis
             resizeMode='cover'
         >
             <View style={styles.likeContainer}>
-                <ThemedButton>
-                    <FontAwesome name="heart-o" size={24} color={theme.white} />
-                    <ThemedText type='smallBold' style={{ color: theme.white }}>{formatNumber(like)}</ThemedText>
+                <ThemedButton onPress={setIsLiked}>
+                    <FontAwesome name={isLiked ? 'heart' : "heart-o"} size={24} color={isLiked ? theme.error : theme.white} />
+                    <ThemedText type='smallBold' style={{ color: theme.white }}>
+                        {isLiked ? formatNumber(like + 1) : formatNumber(like)}
+                    </ThemedText>
                 </ThemedButton>
-                <ThemedButton>
+                <ThemedButton onPress={openComment}>
                     <MaterialCommunityIcons name="comment-text-outline" size={24} color={theme.white} />
                     <ThemedText type='smallBold' style={{ color: theme.white }}>{formatNumber(comment)}</ThemedText>
                 </ThemedButton>

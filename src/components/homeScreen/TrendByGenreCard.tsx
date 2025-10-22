@@ -5,17 +5,22 @@ import { useTheme } from '../../hooks/useTheme'
 import { ThemedText } from '../ThemedText'
 
 interface CardProps {
+   href: any,
    img: any,
    genre: string,
-   subcription: string
+   subcription: string,
+   setTopicTitle: any,
+   setTopicImg: any,
 }
 
-const TrendByGenreCard = ({ img, genre, subcription }: CardProps) => {
+const TrendByGenreCard = ({ href, img, genre, subcription, setTopicTitle, setTopicImg }: CardProps) => {
    const { theme } = useTheme()
    return (
-      <Link href={'#'} style={[styles.container, { padding: 5 }]}>
+      <Link href={href} style={[styles.container, { padding: 5 }]}
+         onPress={() => (setTopicTitle(genre), setTopicImg(img))}
+      >
          <Link.Trigger>
-            <View >
+            <View>
                <Image source={{ uri: `${img}` }} style={styles.cardImg} resizeMode='cover' />
                <View style={{ paddingLeft: 5 }}>
                   <ThemedText type='defaultBold' >{genre}</ThemedText>
@@ -27,10 +32,6 @@ const TrendByGenreCard = ({ img, genre, subcription }: CardProps) => {
             <Link.MenuAction title="Share" icon="square.and.arrow.up" onPress={null} />
             <Link.MenuAction title="Like" icon="heart" onPress={null} />
             <Link.MenuAction title="Add to playlist" icon="plus" onPress={null} />
-            <Link.Menu title="More" icon="ellipsis">
-               <Link.MenuAction title="Copy" icon="doc.on.doc" onPress={() => { }} />
-               <Link.MenuAction title="Delete" icon="trash" destructive onPress={() => { }} />
-            </Link.Menu>
          </Link.Menu>
       </Link>
    )

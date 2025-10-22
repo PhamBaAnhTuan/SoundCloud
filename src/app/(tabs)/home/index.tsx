@@ -14,13 +14,14 @@ import { useTheme } from '@/src/hooks/useTheme';
 import { albums } from '@/src/constants/data';
 // actions
 import SafeScrollView from '@/src/components/SafeScrollView';
+import { useCommonContext } from '@/src/context/CommonContext';
 import { useAppDispatch } from '@/src/hooks/useDispatch';
 import { setThemeAction } from '@/src/stores/slices/themeSlice';
-
+import { router } from 'expo-router';
 
 const HomeScreen = () => {
   const { theme, mode } = useTheme()
-  // console.info("🚀 ~ HomeScreen ~ mode:", mode)
+  const { setTopicTitle, setTopicImg } = useCommonContext()
   const dispatch = useAppDispatch()
   const setTheme = () => {
     dispatch(setThemeAction());
@@ -28,6 +29,7 @@ const HomeScreen = () => {
   }
   const height = Dimensions.get('window').height
   const log = () => console.log('height: ', height)
+
   return (
     <SafeScrollView >
       <View style={styles.titleContainer}>
@@ -36,10 +38,10 @@ const HomeScreen = () => {
           <HelloWave />
         </View>
         <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}>
-          <ThemedButton onPress={() => setTheme()}>
+          <ThemedButton onPress={() => router.push('/home/upload')}>
             <Fontisto name="cloud-up" size={24} color={theme.text} />
           </ThemedButton>
-          <ThemedButton onPress={log}>
+          <ThemedButton onPress={() => router.push('/home/activity')}>
             <Ionicons name="chatbubble-ellipses-outline" size={24} color={theme.text} />
           </ThemedButton>
         </View>
@@ -54,7 +56,7 @@ const HomeScreen = () => {
         start={{ x: 0, y: 0.5 }}
         end={{ x: 1, y: 1 }}
       >
-        <TouchableOpacity style={styles.randomPlayContainer}>
+        <TouchableOpacity style={styles.randomPlayContainer} onPress={setTheme}>
           <View style={{ flexDirection: 'row', alignItems: 'center' }}>
             <Text style={{ color: 'white', fontSize: 17, fontWeight: 'bold' }} >Your likes</Text>
           </View>
@@ -68,9 +70,12 @@ const HomeScreen = () => {
         {albums.map((item, index) => (
           <TopicCard
             key={index}
+            href={'/(tabs)/home/topic_detail'}
+            setTopicTitle={() => setTopicTitle(item.genre)}
+            setTopicImg={() => setTopicImg(item.coverImg)}
             icon={item.coverImg}
             title={item.genre}
-            genre={'item.genre'}
+            genre={item.subscription}
           />
         ))}
       </View>
@@ -82,6 +87,9 @@ const HomeScreen = () => {
             {item.albums.map((album, index) => (
               <TrendByGenreCard
                 key={index}
+                href={'/(tabs)/home/topic_detail'}
+                setTopicTitle={() => setTopicTitle(album.name)}
+                setTopicImg={() => setTopicImg(album.img)}
                 img={album.img}
                 genre={album.name}
                 subcription={album.subscription}

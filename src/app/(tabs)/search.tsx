@@ -7,14 +7,14 @@ import MusicList from '@/src/components/searchScreen/MusicList'
 import RecentlySearch from '@/src/components/searchScreen/RecentSearch'
 import SearchRecommend from '@/src/components/searchScreen/SearchRecommend'
 import { albums } from '@/src/constants/data'
-import { useSearch } from '@/src/context/SearchContext'
+import { useCommonContext } from '@/src/context/CommonContext'
 import { useLayout } from '@/src/hooks/useLayout'
 import { normalizeString } from '@/src/utils/normalizeString'
 
 const SearchScreen = () => {
     const { theme } = useTheme()
     const { contentHeight } = useLayout()
-    const { pattern } = useSearch()
+    const { pattern } = useCommonContext()
     const [filtered, setFiltered]: any = useState({});
 
     const album1 = albums[0].albums.map(alb => alb)

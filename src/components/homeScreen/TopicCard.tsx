@@ -1,3 +1,4 @@
+
 import { Link } from 'expo-router'
 import React from 'react'
 import { Image, StyleSheet, View } from 'react-native'
@@ -16,12 +17,16 @@ interface TopicCardProps {
    onStartstation?: () => void,
    onPlayNext?: () => void,
    onPlayLast?: () => void,
+   setTopicTitle: any,
+   setTopicImg: any,
 }
 
-const TopicCard = ({ icon, title, genre }: TopicCardProps) => {
+const TopicCard = ({ href, icon, title, genre, setTopicTitle, setTopicImg }: TopicCardProps) => {
    const { theme } = useTheme()
    return (
-      <Link href={'#'} style={[styles.container, { backgroundColor: theme.card }]}>
+      <Link href={href} style={[styles.container, { backgroundColor: theme.card }]}
+         onPress={() => (setTopicTitle(title), setTopicImg(icon))}
+      >
          <Link.Trigger>
             <View style={styles.cardContainer}>
                <Image style={styles.imgContainer} source={{ uri: icon }} resizeMode='contain' />
@@ -36,11 +41,10 @@ const TopicCard = ({ icon, title, genre }: TopicCardProps) => {
             <Link.MenuAction title="Share" icon="square.and.arrow.up" onPress={null} />
             <Link.MenuAction title="Like" icon="heart" onPress={null} />
             <Link.MenuAction title="Add to playlist" icon="plus" onPress={null} />
-            {/* <Link.MenuAction title="More" icon="ellipsis" onPress={null} /> */}
-            <Link.Menu title="More" icon="ellipsis">
+            {/* <Link.Menu title="More" icon="ellipsis">
                <Link.MenuAction title="Copy" icon="doc.on.doc" onPress={() => { }} />
                <Link.MenuAction title="Delete" icon="trash" destructive onPress={() => { }} />
-            </Link.Menu>
+            </Link.Menu> */}
          </Link.Menu>
       </Link>
    )
@@ -61,13 +65,14 @@ const styles = StyleSheet.create({
       height: '100%',
       width: '100%',
       flexDirection: 'row',
-      alignItems: 'center'
+      alignItems: 'center',
+      gap: 7
    },
    imgContainer: {
       // borderWidth: 1,
       borderRadius: 10,
       height: 50,
       width: 50,
-      marginRight: 25,
+      // marginRight: 10,
    },
 })
