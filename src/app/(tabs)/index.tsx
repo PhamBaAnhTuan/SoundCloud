@@ -1,46 +1,132 @@
-import { ScrollView, StyleSheet, View } from 'react-native';
-
-import { HelloWave } from '@/src/components/HelloWave';
-import { ThemedText } from '@/src/components/ThemedText';
-import { ThemedView } from '@/src/components/ThemedView';
-import { Fontisto } from '@expo/vector-icons';
+import { FontAwesome, Fontisto, Ionicons } from '@expo/vector-icons';
+import { LinearGradient } from 'expo-linear-gradient';
+import { ScrollView, StyleSheet, TouchableOpacity, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
-export default function HomeScreen() {
+// components
+import { HelloWave } from '@/src/components/HelloWave';
+import { ThemedButton } from '@/src/components/ThemedButton';
+import { ThemedText } from '@/src/components/ThemedText';
+import TopicCard from '@/src/components/TopicCard';
+import TrendByGenreCard from '@/src/components/TrendByGenreCard';
+// hooks
+import { useTheme } from '@/src/hooks/useTheme';
+// albums
+import { albums } from '@/src/constants/data';
+// actions
+import { useAppDispatch } from '@/src/hooks/useDispatch';
+import { setThemeAction } from '@/src/stores/slices/themeSlice';
+
+
+const HomeScreen = () => {
+  const { theme, mode } = useTheme()
+  const dispatch = useAppDispatch()
+  const setTheme = () => {
+    dispatch(setThemeAction());
+    // dispatch(resetThemeState());
+  }
   return (
-    <SafeAreaView style={{ flex: 1 }}>
+    <SafeAreaView style={{ flex: 1, padding: 5, backgroundColor: theme.background }}>
       <ScrollView >
-        <ThemedView style={styles.titleContainer}>
-          <View style={{ flexDirection: 'row' }}>
-            <ThemedText type="subtitle">Welcome!</ThemedText>
+
+        <View style={styles.titleContainer}>
+          <View style={{ flexDirection: 'row', gap: 7 }}>
+            <ThemedText type='subtitle' >Welcome!</ThemedText>
             <HelloWave />
           </View>
-          <View>
-            <Fontisto name="cloud-up" size={24} color="black" />
+          <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}>
+            <ThemedButton onPress={() => setTheme()}>
+              <Fontisto name="cloud-up" size={24} color={theme.text} />
+            </ThemedButton>
+            <ThemedButton>
+              <Ionicons name="chatbubble-ellipses-outline" size={24} color={theme.text} />
+            </ThemedButton>
           </View>
-        </ThemedView>
+        </View>
+
+
+        <LinearGradient
+          colors={[theme.error, theme.border]}
+          style={{
+            borderRadius: 10
+          }}
+        >
+          <TouchableOpacity style={styles.randomPlayContainer}>
+            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+              <ThemedText type='subtitle' >Your likes</ThemedText>
+            </View>
+            <ThemedButton style={{ backgroundColor: theme.border }} >
+              <FontAwesome name="random" size={21} color={theme.text} />
+            </ThemedButton>
+          </TouchableOpacity>
+        </LinearGradient>
+
+        <View style={styles.topicContainer}>
+          {albums.map((item, index) => (
+            <TopicCard
+              icon={"https://images.genius.com/1efc5de2af228d2e49d91bd0dac4dc49.300x300x1.jpg"}
+              title={item.genre}
+              genre={'item.genre'}
+            />
+          ))}
+        </View>
+
+        {albums.map((item, index) => (
+          <View key={index}>
+            <ThemedText type='subtitle' style={{ marginVertical: 10 }} >{item.genre}</ThemedText>
+            <ScrollView horizontal={true} style={styles.trendByGenreContainer}>
+              {item.albums.map((album, index) => (
+                <TrendByGenreCard
+                  key={index}
+                  img={album.img}
+                  genre={album.name}
+                  subcription={album.subscription}
+                />
+              ))}
+            </ScrollView>
+          </View>
+        ))}
 
       </ScrollView>
     </SafeAreaView>
   );
 }
+export default HomeScreen
 
 const styles = StyleSheet.create({
   titleContainer: {
-    height: 60,
+    height: 55,
     flexDirection: 'row',
     alignItems: 'center',
-    gap: 8,
+    justifyContent: 'space-between',
+    // paddingHorizontal: 10
   },
-  stepContainer: {
-    gap: 8,
-    marginBottom: 8,
+  randomPlayContainer: {
+    height: 65,
+    width: '100%',
+    paddingHorizontal: 10,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between'
   },
-  reactLogo: {
-    height: 178,
-    width: 290,
-    bottom: 0,
-    left: 0,
-    position: 'absolute',
+
+  topicContainer: {
+    // borderWidth: 1,
+    minHeight: 150,
+    width: '100%',
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    alignContent: 'space-evenly'
   },
+
+  trendByGenreContainer: {
+    // borderWidth: 1,
+    borderColor: 'white',
+    height: 250,
+    width: '100%',
+    flexDirection: 'row',
+    // padding: 5
+  }
 });

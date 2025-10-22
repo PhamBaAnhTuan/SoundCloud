@@ -1,13 +1,12 @@
-import { Platform } from "react-native";
-import { ThemedText } from "./ThemedText";
+import { Platform, Text } from "react-native";
 
 {
   Platform.select({
     ios: (
-      <ThemedText>
-        The <ThemedText type="defaultSemiBold">components/ParallaxScrollView.tsx</ThemedText>{' '}
+      <Text>
+        The <Text>components/ParallaxScrollView.tsx</Text>{' '}
         component provides a parallax effect for the header image.
-      </ThemedText>
+      </Text>
     ),
   })
 }
